@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CustomerHQ
 
-## Getting Started
+CustomerHQ is a customer success operations platform designed to help Customer Success Managers (CSMs) monitor customer health, identify operational risks early, and manage customer relationships through a unified operational workspace.
 
-First, run the development server:
+The platform focuses on operational clarity, risk visibility, and workflow-driven customer success management.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Core Problem
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Customer success teams often operate across fragmented systems:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* onboarding trackers
+* support tools
+* spreadsheets
+* renewal tracking
+* stakeholder communication
+* activity records
 
-## Learn More
+CustomerHQ aims to provide a unified customer operational view that helps teams proactively identify declining customer health and prioritize intervention.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## MVP Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Accounts Dashboard
 
-## Deploy on Vercel
+* customer health overview
+* risk visibility
+* onboarding tracking
+* escalation monitoring
+* renewal visibility
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Customer 360 View
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* unified customer operational context
+* activity timeline
+* stakeholder visibility
+* onboarding history
+* risk tracking
+* recommended actions
+
+### Risk Feed / Attention Center
+
+* operational triage workspace
+* declining account visibility
+* escalation tracking
+* stakeholder inactivity detection
+* support spike monitoring
+
+---
+
+## Product Philosophy
+
+CustomerHQ is intentionally designed as:
+
+* workflow-first operational software
+* customer success workspace
+* risk visibility platform
+* operational SaaS system
+
+The project intentionally avoids:
+
+* AI-heavy feature overload
+* excessive analytics dashboards
+* unnecessary architectural complexity
+
+---
+
+## Tech Stack
+
+* React
+* TypeScript
+* Next.js (App Router)
+* Tailwind CSS
+* shadcn/ui
+* Lucide Icons
+
+---
+
+## Current Focus
+
+Current development priorities:
+
+* operational workflow clarity
+* believable SaaS UX
+* customer health modeling
+* risk visibility
+* reliability-conscious frontend patterns
+
+---
+
+## Future Direction
+
+Planned future improvements:
+
+* richer customer timelines
+* operational activity tracking
+* lightweight backend integration
+* async workflow handling
+* reliability-focused UX improvements
+* workflow refinement based on real CSM feedback
+
+---
+
+## Status
+
+MVP v1 — In Active Development
