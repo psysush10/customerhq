@@ -25,10 +25,10 @@ export default async function Customer360Page({
 
   return (
     <AppShell>
-      <div className="space-y-6 p-6">
+      <div className="space-y-6 p-4 md:p-6">
       {/* Header */}
       <div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2">
           <h1 className="text-3xl font-semibold">
             {account.name}
           </h1>
@@ -123,9 +123,9 @@ export default async function Customer360Page({
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Left Column */}
-        <div className="space-y-6 xl:col-span-2">
+        <div className="space-y-6 lg:col-span-2">
           {/* Timeline */}
           <Card>
             <CardHeader>

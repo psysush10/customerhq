@@ -29,10 +29,10 @@ export default function DashboardPage() {
 
   return (
     <AppShell>
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 p-4 md:p-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold">
+        <h1 className="text-2xl md:text-3xl font-semibold">
           CustomerHQ Dashboard
         </h1>
 
@@ -51,7 +51,7 @@ export default function DashboardPage() {
           </CardHeader>
 
           <CardContent>
-            <div className="text-3xl font-semibold">
+            <div className="text-2xl md:text-3xl font-semibold">
               {totalAccounts}
             </div>
           </CardContent>
@@ -65,7 +65,7 @@ export default function DashboardPage() {
           </CardHeader>
 
           <CardContent>
-            <div className="text-3xl font-semibold">
+            <div className="text-2xl md:text-3xl font-semibold">
               ${totalMrr.toLocaleString()}
             </div>
           </CardContent>
@@ -79,7 +79,7 @@ export default function DashboardPage() {
           </CardHeader>
 
           <CardContent>
-            <div className="text-3xl font-semibold">
+            <div className="text-2xl md:text-3xl font-semibold">
               ${churnRiskMrr.toLocaleString()}
             </div>
           </CardContent>
@@ -93,7 +93,7 @@ export default function DashboardPage() {
           </CardHeader>
 
           <CardContent>
-            <div className="text-3xl font-semibold">
+            <div className="text-2xl md:text-3xl font-semibold">
               {openEscalations}
             </div>
           </CardContent>
@@ -131,9 +131,9 @@ export default function DashboardPage() {
                 "
               >
                 {/* Header */}
-                <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                <div className="flex flex-col gap-4 lg:flex-row xl:items-start xl:justify-between">
                   <div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2">
                       <h2 className="text-lg font-semibold">
                         {account.name}
                       </h2>

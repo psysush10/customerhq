@@ -39,7 +39,7 @@ const navItems = [
 
 export function Sidebar() {
   return (
-    <aside className="w-64 border-r bg-background h-screen p-4 flex flex-col">
+    <aside className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r bg-background p-4 flex flex-col">
       <div className="mb-8">
         <h1 className="text-2xl font-semibold">CustomerHQ</h1>
         <p className="text-sm text-muted-foreground mt-1">
@@ -47,7 +47,7 @@ export function Sidebar() {
         </p>
       </div>
 
-      <nav className="flex flex-col gap-2">
+      <nav className="flex gap-2 overflow-x-auto lg:flex-col">
         {navItems.map((item) => {
           const Icon = item.icon;
 
@@ -55,7 +55,7 @@ export function Sidebar() {
             <Link
               key={item.label}
               href={item.href}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-muted transition-colors"
+              className="flex shrink-0 items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-muted transition-colors"
             >
               <Icon size={18} />
               <span>{item.label}</span>
