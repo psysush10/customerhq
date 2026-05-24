@@ -5,12 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { getHealthBadgeColor } from "@/app/lib/get-health-badge-color";
 
-interface Customer360PageProps {
-  params: {
-    id: string;
-  };
-}
-
 export default async function Customer360Page({
   params,
 }: {

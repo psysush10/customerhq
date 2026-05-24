@@ -1,7 +1,7 @@
-import { HealthStatus } from "@/app/types/account"
+import { Health } from "@/app/types/account"
 
 export function getHealthBadgeColor(
-  status: HealthStatus
+  status: Health
 ) {
   switch (status) {
     case "Healthy":

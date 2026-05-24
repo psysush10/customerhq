@@ -1,3 +1,6 @@
+
+export type Health = "Healthy" | "At Risk" | "Critical";
+
 export interface Account {
   id: string;
 
@@ -10,7 +13,7 @@ export interface Account {
   arr: number;
 
   // Operational health
-  health: "Healthy" | "At Risk" | "Critical";
+  health: Health
 
   // Activity + engagement
   lastActivityDays: number;
