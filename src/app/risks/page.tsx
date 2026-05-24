@@ -2,164 +2,197 @@ import { AppShell } from "@/app/components/layout/app-shell";
 import { accounts } from "@/app/data/accounts";
 
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { getHealthBadgeColor } from "@/app/lib/get-health-badge-color";
 
-const riskyAccounts = accounts.filter(
-  (account) =>
-    account.healthStatus !== "Healthy"
-);  
+import Link from "next/link";
+
+const accountsRequiringAttention = accounts.filter(
+    (account) =>
+      account.health === "At Risk" ||
+      account.health === "Critical"
+  );
+
+  const churnRiskMrr = accountsRequiringAttention.reduce(
+    (sum, account) => sum + account.mrr,
+    0
+  );
+
+  const openEscalations = accounts.reduce(
+    (sum, account) => sum + account.escalationCount,
+    0
+  );
 
 export default function RisksPage() {
   return (
     <AppShell>
-      <div className="space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-3xl font-semibold">
-            Risk Feed
-          </h1>
+      <div className="space-y-6 p-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-semibold">
+          Risk Feed
+        </h1>
 
-          <p className="text-muted-foreground mt-2">
-            Accounts requiring operational attention.
-          </p>
-        </div>
-
-        {/* Risk Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="p-5">
-            <p className="text-sm text-muted-foreground">
-              Accounts At Risk
-            </p>
-
-            <h2 className="text-3xl font-semibold mt-2">
-              {riskyAccounts.length}
-            </h2>
-          </Card>
-
-          <Card className="p-5">
-            <p className="text-sm text-muted-foreground">
-              Critical Accounts
-            </p>
-
-            <h2 className="text-3xl font-semibold mt-2 text-red-600">
-              {
-                riskyAccounts.filter(
-                  (account) =>
-                    account.healthStatus === "Critical"
-                ).length
-              }
-            </h2>
-          </Card>
-
-          <Card className="p-5">
-            <p className="text-sm text-muted-foreground">
-              Escalation Volume
-            </p>
-
-            <h2 className="text-3xl font-semibold mt-2">
-              {riskyAccounts.reduce(
-                (sum, account) =>
-                  sum + account.openEscalations,
-                0
-              )}
-            </h2>
-          </Card>
-        </div>
-
-        {/* Risk Cards */}
-        <div className="space-y-4">
-          {riskyAccounts.map((account) => (
-            <Card
-              key={account.id}
-              className="p-6"
-            >
-              <div className="flex items-start justify-between">
-                <div className="space-y-4">
-                  {/* Account Info */}
-                  <div>
-                    <h2 className="text-xl font-semibold">
-                      {account.companyName}
-                    </h2>
-
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Assigned CSM:{" "}
-                      {account.assignedCSM}
-                    </p>
-                  </div>
-
-                  {/* Risk Indicators */}
-                  <div className="flex flex-wrap gap-2">
-                    <Badge
-                      className={getHealthBadgeColor(
-                        account.healthStatus
-                      )}
-                    >
-                      {account.healthStatus}
-                    </Badge>
-
-                    {account.openEscalations > 0 && (
-                      <Badge variant="destructive">
-                        {account.openEscalations} Escalations
-                      </Badge>
-                    )}
-
-                    {account.supportTicketSpike && (
-                      <Badge variant="secondary">
-                        Support Spike
-                      </Badge>
-                    )}
-
-                    {account.stakeholderStatus ===
-                      "Inactive" && (
-                      <Badge variant="outline">
-                        Stakeholder Inactive
-                      </Badge>
-                    )}
-                  </div>
-
-                  {/* Operational Context */}
-                  <div className="space-y-1 text-sm text-muted-foreground">
-                    <p>
-                      Last activity:{" "}
-                      {account.lastActivityDays} days ago
-                    </p>
-
-                    <p>
-                      Onboarding status:{" "}
-                      {account.onboardingStatus}
-                    </p>
-
-                    <p>
-                      Missed QBRs:{" "}
-                      {account.missedQBRs}
-                    </p>
-
-                    <p>
-                      Renewal date:{" "}
-                      {account.renewalDate}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Suggested Action */}
-                <div className="max-w-xs">
-                  <p className="text-sm font-medium">
-                    Recommended Action
-                  </p>
-
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Schedule stakeholder alignment
-                    review and investigate escalation
-                    trends within 48 hours.
-                  </p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <p className="mt-2 text-muted-foreground">
+          Operational risks prioritized by escalation
+          activity and renewal visibility.
+        </p>
       </div>
+
+      {/* Metrics */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm text-muted-foreground">
+              Accounts Requiring Attention
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <div className="text-3xl font-semibold">
+              {accountsRequiringAttention.length}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm text-muted-foreground">
+              Churn Risk MRR
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <div className="text-3xl font-semibold">
+              ${churnRiskMrr.toLocaleString()}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm text-muted-foreground">
+              Open Escalations
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <div className="text-3xl font-semibold">
+              {openEscalations}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Risk Cards */}
+      <div className="space-y-4">
+        {accountsRequiringAttention.map((account) => (
+          <Link
+            key={account.id}
+            href={`/customers/${account.id}`}
+          >
+            <Card
+              className="
+                cursor-pointer
+                transition-all
+                duration-200
+                hover:border-primary/40
+                hover:bg-muted/30
+              "
+            >
+              <CardContent className="p-6">
+                {/* Header */}
+                <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-xl font-semibold">
+                        {account.name}
+                      </h2>
+
+                      <Badge
+                        variant={
+                          account.health === "Critical"
+                            ? "destructive"
+                            : "secondary"
+                        }
+                      >
+                        {account.health}
+                      </Badge>
+                    </div>
+
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {account.plan} · $
+                      {account.mrr.toLocaleString()} MRR ·
+                      Renewal in{" "}
+                      {account.renewalDaysRemaining} days
+                    </p>
+                  </div>
+
+                  {/* Risk Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {account.riskTags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Metadata */}
+                <div className="mt-6 grid grid-cols-1 gap-4 text-sm text-muted-foreground md:grid-cols-2 xl:grid-cols-4">
+                  <div>
+                    Assigned CSM:{" "}
+                    <span className="text-foreground">
+                      {account.assignedCsm}
+                    </span>
+                  </div>
+
+                  <div>
+                    Last customer activity:{" "}
+                    <span className="text-foreground">
+                      {account.lastActivityDays} days ago
+                    </span>
+                  </div>
+
+                  <div>
+                    Open escalations:{" "}
+                    <span className="text-foreground">
+                      {account.escalationCount}
+                    </span>
+                  </div>
+
+                  <div>
+                    Support tickets this month:{" "}
+                    <span className="text-foreground">
+                      {
+                        account.supportTicketsThisMonth
+                      }
+                    </span>
+                  </div>
+                </div>
+
+                {/* Latest CSM Context */}
+                <div className="mt-6 rounded-xl border bg-muted/40 p-4">
+                  <p className="text-sm font-medium">
+                    Latest CSM Update
+                  </p>
+
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Customer requested escalation review
+                    after unresolved billing export issue
+                    impacted finance operations.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </div>
     </AppShell>
   );
 }

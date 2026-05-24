@@ -1,32 +1,55 @@
-export type HealthStatus =
-  | "Healthy"
-  | "At Risk"
-  | "Critical";
-
 export interface Account {
   id: string;
-  companyName: string;
-  healthScore: number;
-  healthStatus: HealthStatus;
 
-  onboardingStatus:
-    | "On Track"
-    | "Delayed"
-    | "Blocked";
+  // Core account info
+  name: string;
+  plan: string;
 
-  renewalDate: string;
+  // Revenue context
+  mrr: number;
+  arr: number;
 
+  // Operational health
+  health: "Healthy" | "At Risk" | "Critical";
+
+  // Activity + engagement
   lastActivityDays: number;
+  usageTrend: "Stable" | "Downward" | "Improving";
 
-  assignedCSM: string;
+  // Escalation + support visibility
+  escalationCount: number;
+  supportTicketsThisMonth: number;
 
-  openEscalations: number;
+  // Ownership
+  assignedCsm: string;
+  executiveSponsor: string;
 
-  stakeholderStatus:
-    | "Engaged"
-    | "Inactive";
+  // Renewal lifecycle
+  renewalDate: string;
+  renewalDaysRemaining: number;
 
-  missedQBRs: number;
+  // Risk metadata
+  riskTags: string[];
 
-  supportTicketSpike: boolean;
+  // Timeline / activity feed
+  timeline: {
+    title: string;
+    description: string;
+    timestamp?: string;
+  }[];
+
+  // Stakeholders
+  stakeholders: {
+    name: string;
+    role: string;
+    email?: string;
+    lastActiveDays?: number;
+  }[];
+
+  // Active operational risks
+  activeRisks: {
+    title: string;
+    description: string;
+    severity?: "Low" | "Medium" | "High";
+  }[];
 }
